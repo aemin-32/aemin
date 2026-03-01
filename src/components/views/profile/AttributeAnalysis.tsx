@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Stat, UserProfile } from '../../../types/types';
+import { toRoman } from '../../../utils/roman-helpers';
 import StatsRadar from '../../StatsRadar';
 import { getStatIcon, getStatColor } from '../../../utils/stat-helpers';
 import { Hexagon, List } from 'lucide-react';
@@ -68,7 +69,7 @@ const StatDataRow: React.FC<StatRowProps> = ({ stat, xp, target }) => {
                         <span className="font-black text-[10px] text-life-text uppercase tracking-widest">{fullName}</span>
                         <div className="flex items-center gap-1.5">
                             <span className="text-[8px] font-mono text-life-muted font-bold opacity-50">{stat}</span>
-                            <span className="text-[8px] font-mono text-life-gold font-bold bg-life-gold/10 px-1 rounded-[2px]">LVL {Math.floor(xp / 20) + 1}</span>
+                            <span className="text-[8px] font-mono text-life-gold font-bold bg-life-gold/10 px-1 rounded-[2px]">{toRoman(Math.floor(xp / 20) + 1)}</span>
                         </div>
                     </div>
                 </div>

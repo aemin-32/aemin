@@ -11,8 +11,6 @@ import { useRaids } from '../../contexts/RaidContext';
 import { useCampaign } from '../../contexts/CampaignContext'; 
 import { StoreItem } from '../../types/shopTypes';
 import { playSound } from '../../utils/audio';
-import { auth } from '../../firebase';
-import { GoogleAuthProvider, signInWithPopup, linkWithPopup, User as FirebaseUser } from 'firebase/auth';
 
 // 🟢 NEW COMPONENTS
 import { IdentityCard } from './profile/IdentityCard';
@@ -35,13 +33,7 @@ const ProfileView: React.FC = () => {
   const { storeItems } = shopState; 
 
   const [selectedItem, setSelectedItem] = useState<StoreItem | null>(null);
-  const [currentUser, setCurrentUser] = useState<FirebaseUser | null>(auth.currentUser);
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(u => setCurrentUser(u));
-    return () => unsubscribe();
-  }, []);
-  
   // 🧠 CALCULATE DYNAMIC TITLE
   const skills = skillState?.skills || [];
   const highestSkill = skills.length > 0 
@@ -110,36 +102,6 @@ const ProfileView: React.FC = () => {
       dispatch.addToast('System Cycle Reset Initiated', 'success');
   };
 
-  const handleGoogleLink = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      if (currentUser) {
-        if (currentUser.isAnonymous) {
-            await linkWithPopup(currentUser, provider);
-            dispatch.addToast('Account Linked Successfully', 'success');
-        } else {
-            dispatch.addToast('Already Connected', 'info');
-        }
-      } else {
-        await signInWithPopup(auth, provider);
-        dispatch.addToast('Neural Link Established', 'success');
-      }
-    } catch (error: any) {
-      console.error("Link Error:", error);
-      dispatch.addToast(error.message || 'Link Failed', 'error');
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      await auth.signOut();
-      dispatch.addToast('Neural Link Severed', 'info');
-    } catch (error: any) {
-      console.error("Logout Error:", error);
-      dispatch.addToast('Logout Failed', 'error');
-    }
-  };
-
   return (
     <div className="pb-24 animate-in fade-in zoom-in-95 duration-500 relative">
       
@@ -185,9 +147,6 @@ const ProfileView: React.FC = () => {
           onForceSleep={handleForceSleep}
           onExport={handleExport}
           onImport={handleImport}
-          currentUser={currentUser}
-          onLogin={handleGoogleLink}
-          onLogout={handleLogout}
       />
 
        {/* 🟢 ITEM MODAL */}

@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { toRoman } from '../../utils/roman-helpers';
 import { Flame, Check, Brain, Dumbbell, Activity, Heart, Zap, Shield, Maximize2, X, FolderInput, Trash2, Clock, Play, TrendingUp, ChevronDown, ChevronUp, Palette, Coins, Users, Hash } from 'lucide-react';
 import { Habit, DailyStatus } from '../../types/habitTypes';
 import { Stat } from '../../types/types';
@@ -167,7 +168,7 @@ const HabitCard: React.FC<HabitCardProps> = ({ habit, onProcess, onDelete }) => 
                      <StatIcon stat={habit.stat} size={16} />
                     }
                 </div>
-                <div className={`absolute -bottom-1 left-1/2 -translate-x-1/2 px-1 py-px rounded text-[7px] font-black uppercase tracking-tighter border bg-life-black whitespace-nowrap ${levelData.phaseColor}`}>LVL {levelData.level}</div>
+                <div className={`absolute -bottom-1 left-1/2 -translate-x-1/2 px-1 py-px rounded text-[7px] font-black uppercase tracking-tighter border bg-life-black whitespace-nowrap ${levelData.phaseColor}`}>{toRoman(levelData.level)}</div>
             </div>
 
             <div className="flex-1 min-w-0 flex flex-col justify-center">

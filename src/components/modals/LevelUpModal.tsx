@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { toRoman } from '../../utils/roman-helpers';
 import { useLifeOS } from '../../contexts/LifeOSContext';
 import { Crown, Sparkles, TrendingUp, Check } from 'lucide-react';
 
@@ -43,7 +44,7 @@ const LevelUpModal: React.FC = () => {
             LEVEL UP!
         </h2>
         <div className="text-2xl font-mono font-bold text-life-gold mb-8 tracking-widest border px-4 py-1 rounded border-life-gold/50 bg-life-gold/10">
-            LEVEL {user.level}
+            {toRoman(user.level)}
         </div>
 
         {/* 🟢 REWARDS CARD */}

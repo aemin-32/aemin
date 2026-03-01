@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { toRoman } from '../utils/roman-helpers';
 import { Activity, ChevronRight, Terminal } from 'lucide-react';
 import { useLifeOS } from '../contexts/LifeOSContext';
 import { Stat } from '../types/types';
@@ -126,7 +127,7 @@ const OnboardingSequence: React.FC = () => {
                             <h2 className="text-2xl font-black text-white uppercase mb-1">{name}</h2>
                             <p className="text-life-gold font-mono text-sm uppercase tracking-widest">READY</p>
                             <div className="mt-4 pt-4 border-t border-life-gold/20 flex justify-center gap-4 text-[10px] text-life-muted uppercase font-bold">
-                                <span>Lvl 1</span>
+                                <span>{toRoman(1)}</span>
                                 <span>Status: ONLINE</span>
                             </div>
                         </div>

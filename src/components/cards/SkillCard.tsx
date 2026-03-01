@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { toRoman } from '../../utils/roman-helpers';
 import { Brain, Dumbbell, Activity, Heart, Zap, Shield, AlertTriangle, Palette, Coins, Users, Flame } from 'lucide-react';
 // --- تصحيح المسارات (العودة خطوتين للوراء ../../) ---
 import { Skill, SkillRank } from '../../types/skillTypes';
@@ -93,7 +94,7 @@ const SkillCard: React.FC<SkillCardProps> = ({ skill }) => {
                 {/* 🟢 PROGRESS BAR */}
                 <div className="relative pt-1">
                     <div className="flex justify-between text-[10px] font-mono font-bold mb-1">
-                        <span className={rankTextColor}>LVL {skill.level}</span>
+                        <span className={rankTextColor}>{toRoman(skill.level)}</span>
                         <span className="text-life-muted">{skill.currentXP} / {skill.targetXP} XP</span>
                     </div>
                     <div className="h-1.5 w-full bg-life-black rounded-full overflow-hidden border border-zinc-800">

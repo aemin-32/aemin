@@ -3,22 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { User, ShoppingBag, CheckSquare, Zap, Calendar, BookOpen, Plus, LayoutList, Target, Scale, Brain, LogIn } from 'lucide-react';
 import { useLifeOS } from '../contexts/LifeOSContext';
 import { ViewState } from '../types/types';
-import { auth } from '../firebase';
-import { onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
 
 const Navigation: React.FC = () => {
   const { state, dispatch } = useLifeOS();
   const { currentView, habitsViewMode, tasksViewMode } = state.ui; 
   const { user } = state;
   const showCampaign = user.preferences.showCampaignUI;
-
-  // 🟢 AUTH STATE
-  const [currentUser, setCurrentUser] = useState<FirebaseUser | null>(null);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (u) => setCurrentUser(u));
-    return () => unsubscribe();
-  }, []);
 
   // 🧠 MEMORY STATE
   // Left Button: Profile -> Skills -> Shop
@@ -225,17 +215,6 @@ const Navigation: React.FC = () => {
         </span>
         {isRightActive && <div className="absolute -bottom-1 w-1 h-1 bg-life-hard rounded-full" />}
       </button>
-
-      {/* 🔐 LOGIN BUTTON (Only for Guests) */}
-      {!currentUser && (
-          <button 
-            onClick={handleLoginClick}
-            className="absolute top-[-40px] right-4 bg-life-black/80 backdrop-blur border border-life-gold/30 text-life-gold p-2 rounded-full shadow-lg animate-bounce"
-            title="Secure Link"
-          >
-              <LogIn size={16} />
-          </button>
-      )}
 
     </nav>
   );

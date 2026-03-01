@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { toRoman } from '../../utils/roman-helpers';
 import { X, Trophy, Calendar, Zap, AlertTriangle, Trash2, Dumbbell, Brain, Heart, Activity, Clock, Palette, Users, Coins, Flame, Edit2, BarChart2, ChevronLeft } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 // --- تصحيح المسارات (الرجوع خطوتين ../../ والدخول للمجلدات الصحيحة) ---
@@ -176,7 +177,7 @@ const SkillDetails: React.FC = () => {
                             <div className="space-y-2">
                                 <div className="flex justify-between items-end">
                                     <span className="text-4xl font-black font-mono leading-none" style={{ color: progressPercent >= 100 ? '#10b981' : undefined }}>
-                                        LVL {skill.level}
+                                        {toRoman(skill.level)}
                                     </span>
                                     <span className="text-xs font-mono text-life-muted mb-1">
                                         <span className="text-life-text">{skill.currentXP}</span> / {skill.targetXP} XP

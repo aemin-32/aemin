@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { toRoman } from '../../utils/roman-helpers';
 import { Dumbbell, Brain, Zap, Shield, Heart, Activity, ChevronRight, BookOpen, Clock, Calendar, AlignLeft, Folder, Plus, Trash2, Target, Bell, X, Palette, CalendarPlus, Flame, Users, Coins } from 'lucide-react';
 import { useTasks } from '../../contexts/TaskContext';
 import { useSkills } from '../../contexts/SkillContext';
@@ -246,7 +247,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onClose, initialData }) => {
                                 >
                                     <option value="">Select a Skill...</option>
                                     {skillState.skills.map(skill => (
-                                        <option key={skill.id} value={skill.id}>{skill.title} (Lvl {skill.level})</option>
+                                        <option key={skill.id} value={skill.id}>{skill.title} ({toRoman(skill.level)})</option>
                                     ))}
                                 </select>
                                 <ChevronRight className="absolute right-3 top-1/2 -translate-y-1/2 text-life-muted rotate-90 pointer-events-none" size={14} />

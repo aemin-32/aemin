@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { toRoman } from '../../utils/roman-helpers';
 import { Clock, CheckSquare, Dumbbell, Brain, Zap, Shield, Heart, Activity, ChevronRight, Folder, BookOpen, Bell, X, Trash2, Plus, Palette, CalendarPlus, Repeat, Minus, Flame, Users, Coins } from 'lucide-react';
 import { useHabits } from '../../contexts/HabitContext';
 import { useSkills } from '../../contexts/SkillContext';
@@ -268,7 +269,7 @@ const HabitForm: React.FC<HabitFormProps> = ({ onClose, initialData }) => {
                                 >
                                     <option value="">Select a Skill...</option>
                                     {skillState.skills.map(skill => (
-                                        <option key={skill.id} value={skill.id}>{skill.title} (Lvl {skill.level})</option>
+                                        <option key={skill.id} value={skill.id}>{skill.title} ({toRoman(skill.level)})</option>
                                     ))}
                                 </select>
                                 <ChevronRight className="absolute right-3 top-1/2 -translate-y-1/2 text-life-muted rotate-90 pointer-events-none" size={14} />
